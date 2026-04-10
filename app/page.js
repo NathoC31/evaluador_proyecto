@@ -36,40 +36,41 @@ export default function Home() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", padding: "1rem", maxWidth: "500px", margin: "0 auto" }}>
-      <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <h1 style={{ fontSize: "1.75rem", fontWeight: 700, color: "#1a1a2e", marginBottom: "0.5rem" }}>
+    <div style={{ minHeight: "100vh", padding: "1rem", maxWidth: "500px", margin: "0 auto", paddingBottom: "3rem" }}>
+      <div style={{ textAlign: "center", marginBottom: "2rem", marginTop: "1rem" }}>
+        <h1 style={{ fontSize: "2rem", fontWeight: 700, color: "#1f2937", marginBottom: "0.5rem", letterSpacing: "-0.025em" }}>
           Evaluación de Stands
         </h1>
-        <p style={{ color: "#6b7280" }}>Selecciona un stand para evaluar</p>
+        <p style={{ color: "#6b7280", fontSize: "1rem" }}>Selecciona un stand para evaluar</p>
       </div>
 
+      
       {error && (
-        <div style={{ padding: "1rem", background: "#fee2e2", borderRadius: "8px", color: "#b91c1c", marginBottom: "1rem", textAlign: "center" }}>
+        <div style={{ padding: "1rem", background: "#fef2f2", borderRadius: "12px", color: "#dc2626", marginBottom: "1rem", textAlign: "center", border: "1px solid #fecaca" }}>
           {error}
         </div>
       )}
 
       {stands.length === 0 && !error && (
-        <div style={{ textAlign: "center", padding: "2rem", color: "#6b7280" }}>
+        <div style={{ textAlign: "center", padding: "3rem", color: "#6b7280", background: "#f9fafb", borderRadius: "16px" }}>
           No hay stands disponibles
         </div>
       )}
 
       {stands.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           {stands.map(stand => (
             <button
               key={stand.id}
               onClick={() => setStandSeleccionado(stand)}
-              style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "1rem", background: "white", border: "1px solid #e5e7eb", borderRadius: "12px", cursor: "pointer", textAlign: "left" }}
+              style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "1.25rem", background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", cursor: "pointer", textAlign: "left", boxShadow: "0 1px 3px rgba(0,0,0,0.05)", transition: "all 0.2s", boxSizing: "border-box" }}
             >
-              <div style={{ width: "40px", height: "40px", background: "#4f46e5", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 700 }}>
+              <div style={{ width: "48px", height: "48px", background: "#374151", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 700, fontSize: "1.25rem" }}>
                 {stand.nombre.charAt(0)}
               </div>
               <div>
-                <p style={{ fontWeight: 600, color: "#1a1a2e" }}>{stand.nombre}</p>
-                <p style={{ fontSize: "0.85rem", color: "#6b7280" }}>{stand.categoria || "Sin categoría"}</p>
+                <p style={{ fontWeight: 600, color: "#1f2937", fontSize: "1.1rem" }}>{stand.nombre}</p>
+                <p style={{ fontSize: "0.875rem", color: "#6b7280" }}>{stand.categoria || "Sin categoría"}</p>
               </div>
             </button>
           ))}
@@ -135,7 +136,8 @@ function EvaluacionStand({ stand, onBack }) {
         </div>
 
         <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <p style={{ fontSize: "1rem", fontWeight: 500, marginBottom: "1rem" }}>¿Cómo evaluarías este stand?</p>
+          <p style={{ fontSize: "1rem", fontWeight: 800, marginBottom: "1rem" }}>¿Cómo evaluarías este stand?</p>
+          <p style={{ fontSize: "1rem", fontWeight: 500, marginBottom: "1rem" }}>Teniendo en cuenta 5 como la calificación máxima y 1 como la mínima</p>
           <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem" }}>
             {[1, 2, 3, 4, 5].map(num => (
               <button
@@ -174,6 +176,7 @@ function EvaluacionStand({ stand, onBack }) {
           {loading ? "Enviando..." : "Enviar Evaluación"}
         </button>
       </div>
-    </div>
+</div>
+    
   );
 }

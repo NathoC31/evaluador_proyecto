@@ -26,14 +26,11 @@ export default function AdminPage() {
       return;
     }
     
-    const { data: adminData } = await supabase
-      .from("admins")
-      .select("*")
-      .eq("usuario_id", s.user.id)
-      .eq("activo", true)
-      .maybeSingle();
+    const { data: isAdmin } = await supabase.rpc("is_superadmin", {
+      user_uuid: s.user.id
+    });
     
-    if (!adminData || adminData.rol !== "superadmin") {
+    if (!isAdmin) {
       window.location.href = "/";
       return;
     }

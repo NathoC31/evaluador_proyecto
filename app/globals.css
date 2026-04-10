@@ -21,8 +21,8 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--gray-50);
-  color: var(--gray-900);
+  background: #f9fafb;
+  color: #1f2937;
   min-height: 100vh;
 }
 

@@ -27,11 +27,9 @@ export default function AdminLogin() {
       return;
     }
 
-    const { data: adminData, error: adminError } = await supabase
-      .from("admins")
-      .select("rol, activo")
-      .eq("usuario_id", data.session.user.id)
-      .single();
+    const { data: isAdmin, error: adminError } = await supabase.rpc("is_superadmin", {
+      user_uuid: data.session.user.id
+    });
 
     if (adminError) {
       console.log("Admin error:", adminError);
@@ -41,7 +39,7 @@ export default function AdminLogin() {
       return;
     }
 
-    if (adminData.rol !== "superadmin" || !adminData.activo) {
+    if (!isAdmin) {
       await supabase.auth.signOut();
       setError("No tienes acceso de administrador");
       setLoading(false);
@@ -52,15 +50,15 @@ export default function AdminLogin() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#f3f4f6", padding: "1rem" }}>
-      <div style={{ background: "white", padding: "2rem", borderRadius: "16px", width: "100%", maxWidth: "400px", boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }}>
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#f3f4f6", padding: "1rem", paddingBottom: "3rem" }}>
+      <div style={{ background: "white", padding: "2.5rem", borderRadius: "20px", width: "100%", maxWidth: "400px", boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}>
         <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <h1 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "0.5rem" }}>Admin</h1>
-          <p style={{ color: "#6b7280" }}>Ingresa tus credenciales</p>
+          <h1 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "0.5rem", color: "#1f2937" }}>Administrador</h1>
+          <p style={{ color: "#6b7280", fontSize: "1rem" }}>Ingresa tus credenciales</p>
         </div>
 
         {error && (
-          <div style={{ padding: "0.75rem", background: "#fee2e2", borderRadius: "8px", color: "#b91c1c", marginBottom: "1rem", textAlign: "center" }}>
+          <div style={{ padding: "1rem", background: "#fef2f2", borderRadius: "12px", color: "#dc2626", marginBottom: "1rem", textAlign: "center", border: "1px solid #fecaca" }}>
             {error}
           </div>
         )}
@@ -100,6 +98,8 @@ export default function AdminLogin() {
             ← Volver a evaluar
           </a>
         </div>
+
+        
       </div>
     </div>
   );
