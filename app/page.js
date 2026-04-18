@@ -37,7 +37,10 @@ export default function Home() {
 
   return (
     <div style={{ minHeight: "100vh", padding: "1rem", maxWidth: "500px", margin: "0 auto", paddingBottom: "3rem" }}>
-      <div style={{ textAlign: "center", marginBottom: "2rem", marginTop: "1rem" }}>
+      <div style={{ textAlign: "center", marginBottom: "1.5rem", marginTop: "1rem" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "0.75rem", padding: "0.75rem 1.5rem", borderRadius: "12px", marginBottom: "1rem" }}>
+          <img src="/assets/logo.jpg" alt="Unidad Educativa" style={{ height: "100px" }} />
+        </div>
         <h1 style={{ fontSize: "2rem", fontWeight: 700, color: "#1f2937", marginBottom: "0.5rem", letterSpacing: "-0.025em" }}>
           Evaluación de Stands
         </h1>
@@ -65,10 +68,10 @@ export default function Home() {
               onClick={() => setStandSeleccionado(stand)}
               style={{ display: "flex", alignItems: "center", gap: "1rem", padding: "1.25rem", background: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "16px", cursor: "pointer", textAlign: "left", boxShadow: "0 1px 3px rgba(0,0,0,0.05)", transition: "all 0.2s", boxSizing: "border-box" }}
             >
-              <div style={{ width: "48px", height: "48px", background: "#374151", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 700, fontSize: "1.25rem" }}>
+              <div style={{ minWidth: "48px", width: "48px", height: "48px", background: "#374151", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 700, fontSize: "1.25rem" }}>
                 {stand.nombre.charAt(0)}
               </div>
-              <div>
+              <div style={{ flex: 1, minWidth: 0 }}>
                 <p style={{ fontWeight: 600, color: "#1f2937", fontSize: "1.1rem" }}>{stand.nombre}</p>
                 <p style={{ fontSize: "0.875rem", color: "#6b7280" }}>{stand.categoria || "Sin categoría"}</p>
               </div>
